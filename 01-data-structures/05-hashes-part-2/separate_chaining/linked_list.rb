@@ -1,3 +1,4 @@
+require 'benchmark'
 require_relative 'node'
 
 class LinkedList
