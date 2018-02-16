@@ -44,6 +44,7 @@ RSpec.describe HashClass, type: Class do
     it "does not resize the array when a collision occurs and the values match" do
       hash = HashClass.new(1)
       hash["key"] = "value"
+      print hash["key"]
       expect(hash.size).to eq 1
       hash["key"] = "value"
       expect(hash.size).to eq 1

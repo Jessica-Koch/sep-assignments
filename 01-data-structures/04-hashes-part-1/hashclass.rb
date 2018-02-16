@@ -1,34 +1,59 @@
+require_relative 'hash_item'
 class HashClass
 
   def initialize(size)
     items = Array.new(size)
+
     @items = items
+    @items
   end
 
   def []=(key, value)
-    @items.push([key, value])
-    @items.delete_if{|k, v| k == nil}
+    len = @items.size
 
-    @items
+    i = index(key, len)
+
+    if @items[i] != nil
+      if @items[i][1] == value
+        value =@items[i][1]
+        return value
+
+      elsif
+        @items[i][1] != value && @items[i][0] == key
+        resize
+      end
+      #     print @items[i]
+      #   elsif @items[i] != nil && @items[i][0] != value
+      #
+      #
+      # elsif @items[i] == nil && @items[i][0] != value
+    else
+      @items[i] = [key, value]
+    end
+
   end
 
 
   def [](key)
-    @items.assoc(key)[1]
+    k = index(key, size)
+
+    # @items.find do |el|
+    #   key == el
+    # end
+
+    @items[k][1]
   end
 
   def resize
-    len = @items.length
-    arr = Array.new(len, [])
-
-    @items = @items + arr
+    @items= @items.clone + @items
+    @items
   end
 
   # Returns a unique, deterministically reproducible index into an array
   # We are hashing based on strings, let's use the ascii value of each string as
   # a starting point.
   def index(key, size)
-    @items
+    key.sum % size
   end
 
   # Simple method to return the number of items in the hash
