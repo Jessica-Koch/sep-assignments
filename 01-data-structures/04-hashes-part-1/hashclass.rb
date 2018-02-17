@@ -15,18 +15,14 @@ class HashClass
 
     if @items[i] != nil
       if @items[i][1] == value
-        value =@items[i][1]
+        value = @items[i][1]
         return value
 
       elsif
         @items[i][1] != value && @items[i][0] == key
         resize
       end
-      #     print @items[i]
-      #   elsif @items[i] != nil && @items[i][0] != value
-      #
-      #
-      # elsif @items[i] == nil && @items[i][0] != value
+
     else
       @items[i] = [key, value]
     end
@@ -36,10 +32,6 @@ class HashClass
 
   def [](key)
     k = index(key, size)
-
-    # @items.find do |el|
-    #   key == el
-    # end
 
     @items[k][1]
   end
