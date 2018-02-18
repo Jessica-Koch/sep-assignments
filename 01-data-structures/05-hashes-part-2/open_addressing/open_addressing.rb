@@ -5,11 +5,10 @@ class OpenAddressing
     @size = size
     items = Array.new(@size)
     @items = items
-
   end
 
   def []=(key, value)
-    i = index(key, size)
+    i = index(key, @size)
 
     if @items[i] == nil
       @items[i] = [key, value]

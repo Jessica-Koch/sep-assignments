@@ -5,47 +5,43 @@ class HashClass
     items = Array.new(size)
 
     @items = items
-    @items
   end
 
   def []=(key, value)
-    len = @items.size
-
-    i = index(key, len)
-
-    if @items[i] != nil
-      if @items[i][1] == value
-        value = @items[i][1]
-        return value
-
-      elsif
-        @items[i][1] != value && @items[i][0] == key
-        resize
-      end
-
+    hash_item = HashItem.new(key, value)
+    if @items[index(key, size)] && @items[index(key, size)].value != value
+      resize
+      @items[index(key, size)] = hash_item
     else
-      @items[i] = [key, value]
+      @items[index(key, size)] = hash_item
     end
-
   end
 
-
   def [](key)
-    k = index(key, size)
-
-    @items[k][1]
+    @items[index(key, size)].value
   end
 
   def resize
-    @items= @items.clone + @items
-    @items
+    old_arr = @items
+    @items = Array.new(@items.size * 2)
+
+    old_arr.each do |item|
+      if item != nil
+        @items[index(item.key, size)] = item
+      end
+    end
   end
 
   # Returns a unique, deterministically reproducible index into an array
   # We are hashing based on strings, let's use the ascii value of each string as
   # a starting point.
   def index(key, size)
-    key.sum % size
+    if @items[key.sum % size] && @items[key.sum % size].key != key # if there is a collision, call resize fxn again
+      resize
+      key.sum % size
+    else
+      key.sum % size
+    end
   end
 
   # Simple method to return the number of items in the hash
