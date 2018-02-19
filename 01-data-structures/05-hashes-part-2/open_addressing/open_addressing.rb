@@ -36,9 +36,14 @@ class OpenAddressing
 
   # Given an index, find the next open index in @items
   def next_open_index(index)
+    initial_index = index
     while index < @size
       if @items[index] == nil
-        return index
+        index
+      elsif @items[index] != nil
+        if index == (self.size - 1)
+
+        end
       end
       index += 1
     end

@@ -7,21 +7,20 @@ class SeparateChaining
     @size = size
     @max_load_factor = 0.7
     @items = Array.new(@size)
+    @sub_arrays = 0
   end
 
   def []=(key, value)
-    i = index(key, @size)
-
-    if @items[i] == nil
-      @items[i] = [key, value]
+    linked_list = LinkedList.new
+        if @items[index(key, @size)] == nil
+      @items[index(key, @size)].value = [key, value]
     else
-      @items[i].push([key, value])
+      @items[index(key, @size)].push([key, value])
     end
   end
 
   def [](key)
-    i = index(key, @size)
-    @items[i][1]
+    @items[index(key, @size)].value
   end
 
   # Returns a unique, deterministically reproducible index into an array
@@ -33,19 +32,10 @@ class SeparateChaining
 
   # Calculate the current load factor
   def load_factor
-    buckets = @size
-    sub_arrays = 0
-    @items = @items.compact
-    @items.map do |row|
-      if row != nil
-        sub_arrays = sub_arrays + row.length
-      end
-    end
-
     if size == 0
       return 0
     else
-      sub_arrays / size
+      @sub_arrays.to_f / size.to_f
     end
   end
 
