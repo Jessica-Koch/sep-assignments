@@ -6,21 +6,40 @@ class SeparateChaining
   def initialize(size)
     @size = size
     @max_load_factor = 0.7
-    @items = Array.new(@size)
-    @sub_arrays = 0
+    @items = Array.new(size)
+    @node_count = 0
   end
 
   def []=(key, value)
-    linked_list = LinkedList.new
-        if @items[index(key, @size)] == nil
-      @items[index(key, @size)].value = [key, value]
+    i = index(key, @size)
+    node = Node.new(key, value)
+    if @items[index(key, @size)] && @items[index(key, @size)].head.value == value
+      @items[index(key, @size)].add_to_tail(node)
+      @node_count = @node_count + 1
+
+
+    elsif @items[index(key, @size)] && @items[index(key, @size)].head.key != key
+      # puts "elsif #{@items}"
+      # puts '================================================'
+      resize
+      @items[index(key, @size)].add_to_tail(node)
+      @node_count = @node_count + 1
+
+
     else
-      @items[index(key, @size)].push([key, value])
+      # puts "else #{@items}"
+      # puts '================================================'
+
+      @items[index(key, @size)] = LinkedList.new
+      @items[index(key, @size)].add_to_front(node)
+      @node_count = @node_count + 1
+
     end
   end
 
   def [](key)
-    @items[index(key, @size)].value
+    i = index(key, @size)
+    @items[index(key, size)].tail.value
   end
 
   # Returns a unique, deterministically reproducible index into an array
@@ -32,21 +51,34 @@ class SeparateChaining
 
   # Calculate the current load factor
   def load_factor
-    if size == 0
-      return 0
-    else
-      @sub_arrays.to_f / size.to_f
-    end
+    buckets = @size
+    lf = @node_count.to_f / buckets.to_f
+
+    lf.to_f
   end
 
   # Simple method to return the number of items in the hash
   def size
-    @items.length
+    @items.size
   end
 
   # Resize the hash
   def resize
-    @items = @items.clone + @items
-    @items
+    new_chain = @items + Array.new(@size)
+    # puts "resizing hash"
+    @items.each do |linked_list|
+      #   # puts linked_list == nil
+      #   # if linked_list == nil
+      #   #   puts new_chain.methods
+      #   # elsif linked_list
+      # puts "linked_list: #{linked_list}"
+      #   #
+      #   # end
+      #
+      #   # first_node = linked_list.head
+      #   # puts "first_node key: #{first_node.key}"
+    end
+    # puts "Hash resized"
   end
+
 end

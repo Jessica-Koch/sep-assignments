@@ -9,7 +9,7 @@ class MyQueue
   end
 
   def enqueue(element)
-    index = @queue.length
+    @queue.length
 
     @queue << element
     @head = @queue[0]
@@ -23,12 +23,14 @@ class MyQueue
     @head = @queue[0]
     @tail = @queue[@queue.length - 1]
 
-    temp
+    temp[0] == nil
   end
 
   def empty?
     if @queue.length > 0
       false
+    else
+      true
     end
   end
 end

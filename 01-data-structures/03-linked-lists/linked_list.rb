@@ -65,6 +65,7 @@ Benchmark.bm(1) do |x|
   }
   x.report('create 10,000 element array  ') {
     arr = Array(1..10_000)
+    arr
   }
 
   x.report('get 500th el in LinkedList') {

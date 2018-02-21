@@ -27,7 +27,7 @@ class LinkedList
 
   # This method prints out a representation of the list.
   def print
-    @ll.map { |a| puts a.data }
+    # @ll.map { |a| puts a.data }
 
   end
 

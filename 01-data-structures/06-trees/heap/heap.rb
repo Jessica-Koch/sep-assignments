@@ -1,4 +1,8 @@
 require_relative 'node'
 
 class Heap
-end
+  def initialize
+    @elements = [nil]
+  end
+
+  end

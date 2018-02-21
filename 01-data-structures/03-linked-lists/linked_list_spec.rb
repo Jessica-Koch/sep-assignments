@@ -1,92 +1,89 @@
-include RSpec
-
+require 'benchmark'
 require_relative 'node'
-require_relative 'linked_list'
 
-RSpec.describe LinkedList, type: Class do
-  let(:n1) { Node.new("Rob") }
-  let(:n2) { Node.new("Ben") }
-  let(:n3) { Node.new("Mike") }
-  let(:llist) { LinkedList.new }
+class LinkedList
+  attr_accessor :head
+  attr_accessor :tail
 
-  describe "#add_to_tail" do
-    it "adds a Node to the tail" do
-      llist.add_to_tail(n1)
-      expect(llist.tail).to eq n1
-      llist.add_to_tail(n2)
-      expect(llist.tail).to eq n2
-    end
+  def initialize
+    @ll = Array.new
+  end
+  # This method creates a new `Node` using `data`, and inserts it at the end of the list.
+  def add_to_tail(node)
+    @ll << node
+    @head = @ll[0]
+    @tail = @ll[@ll.length - 1]
+    @tail
   end
 
-  describe "#remove_tail" do
-    it "removes nodes from the tail" do
-      llist.add_to_tail(n1)
-      llist.add_to_tail(n2)
-      expect(llist.tail).to eq n2
-      llist.remove_tail
-      expect(llist.tail).to eq n1
-      llist.remove_tail
-      expect(llist.tail).to eq nil
-    end
+  # This method removes the last node in the lists and must keep the rest of the list intact.
+  def remove_tail
+    lastIndex = @ll.length - 1
+    temp = @ll.delete_at(lastIndex)
+
+    @tail = @ll[@ll.length - 1]
+    @tail
   end
 
-  describe "#print" do
-    before do
-      llist.add_to_tail(n1)
-      llist.add_to_tail(n2)
-    end
+  # This method prints out a representation of the list.
+  def print
+    @ll.map { |a| puts a.data }
 
-    specify { expect { llist.print }.to output("Rob\nBen\n").to_stdout }
   end
 
-  describe "#delete" do
-    before do
-      llist.add_to_tail(n1)
-      llist.add_to_tail(n2)
-      llist.add_to_tail(n3)
-    end
+  # This method removes `node` from the list and must keep the rest of the list intact.
+  def delete(node)
+    temp = @ll[0]
+    i = @ll.index(node)
+    @ll.delete_at(i)
+    @head = @ll[0]
+    @head.next = @ll[1]
+    @tail = @ll[@ll.length - 1]
 
-    it "removes the head of a list properly" do
-      llist.delete(n1)
-      expect(llist.head).to eq n2
-      expect(llist.head.next).to eq n3
-      expect(llist.tail).to eq n3
-    end
+    temp
 
-    it "removes the middle element of a list properly" do
-      llist.delete(n2)
-      expect(llist.head).to eq n1
-      expect(llist.head.next).to eq n3
-      expect(llist.tail).to eq n3
-    end
-
-    it "removes the last element of a list properly" do
-      llist.delete(n3)
-      expect(llist.head).to eq n1
-      expect(llist.head.next).to eq n2
-      expect(llist.tail).to eq n2
-    end
   end
 
-  describe "#add_to_front" do
-    it "adds the node to the front of the linked list" do
-      llist.add_to_front(n1)
-      expect(llist.head).to eq n1
-      llist.add_to_front(n2)
-      expect(llist.head).to eq n2
-    end
+  # This method adds `node` to the front of the list and must set the list's head to `node`.
+  def add_to_front(node)
+    @ll.unshift(node)
+    @head = @ll[0]
+    @head.next = @ll[1]
   end
 
-  describe "#remove_front" do
-    it "removes the node to the front of the linked list" do
-      llist.add_to_front(n1)
-      expect(llist.head).to eq n1
-      llist.add_to_front(n2)
-      expect(llist.head).to eq n2
-      llist.remove_front
-      expect(llist.head).to eq n1
-      llist.remove_front
-      expect(llist.head).to eq nil
-    end
+  # This method removes and returns the first node in the Linked List and must set Linked List's head to the second node.
+  def remove_front
+    @ll.delete_at(0)
+    @head = @ll[0]
   end
 end
+#
+# Benchmark.bm(1) do |x|
+#   x.report('linked_list-append   ') {
+#     ll = LinkedList.new
+#     (1..10_000).each{|num| ll.add_to_tail(Node.new(num))}
+#   }
+#   x.report('create 10,000 element array  ') {
+#     arr = Array(1..10_000)
+#   }
+#
+#   x.report('get 500th el in LinkedList') {
+#     ll = LinkedList.new
+#     (1..5_000).each{|num| ll.add_to_tail(num)}
+#     ll.tail
+#
+#   }
+#   x.report('get 500th el in Array') {
+#     arr = Array(1..5_000)
+#     arr[4999]
+#   }
+#   x.report('remove 500th el in LinkedList') {
+#     ll = LinkedList.new
+#     (1..5_000).each{|num| ll.add_to_tail(num)}
+#     ll.remove_tail
+#   }
+#   x.report('remove 500th el in Array') {
+#     arr = Array(1..5_000)
+#     arr.pop()
+#   }
+# end

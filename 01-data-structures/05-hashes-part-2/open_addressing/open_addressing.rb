@@ -3,28 +3,43 @@ require_relative 'node'
 class OpenAddressing
   def initialize(size)
     @size = size
-    items = Array.new(@size)
-    @items = items
+    @items = Array.new(@size)
   end
 
   def []=(key, value)
-    i = index(key, @size)
+    node = Node.new(key, value)
+    if @items[index(key, @size)] != nil # our index is full
+      if next_open_index(index(key, @size)) == -1
+        resize
+        @items[index(key, @size)] = node
+      elsif next_open_index(index(key, @size)) != -1
+        new_index = next_open_index(index(key, @size))
+        @items[new_index] = node
+        node
+      else
+        puts "some else case i am missing"
+      end
 
-    if @items[i] == nil
-      @items[i] = [key, value]
-    elsif next_open_index(i) == -1
-      resize
-    elsif next_open_index(i) != -1
-      new_index = next_open_index(i)
-      @items[new_index] = [key, value]
-
+    else # our index is empty
+      @items[index(key, @size)] = node
     end
   end
 
   def [](key)
-    i = index(key, @size)
+    index = index(key, @size)
+    current_index = index
 
-    @items[i][1]
+    while current_index < @size || current_index != index
+      if @items[current_index].key == key
+        break
+      elsif current_index + 1 == @size
+        current_index = 0
+      else
+        current_index += 1
+      end
+    end
+    return @items[current_index].value
+
   end
 
   # Returns a unique, deterministically reproducible index into an array
@@ -36,32 +51,47 @@ class OpenAddressing
 
   # Given an index, find the next open index in @items
   def next_open_index(index)
-    initial_index = index
-    while index < @size
-      if @items[index] == nil
-        index
-      elsif @items[index] != nil
-        if index == (self.size - 1)
+    open_index = nil
+    current_index = index
 
-        end
-      end
-      index += 1
+    if index >= @size
+      open_index = index - 1
     end
-    # array is full
-    index = -1
-    index
+
+    while current_index < @size
+      if current_index <= @size and @size < 2
+        open_index = -1
+        break
+      elsif @items[current_index] == nil
+        open_index = current_index
+        break
+      elsif current_index + 1 == @size
+        current_index = 0
+      elsif current_index + 1 == index
+        open_index = -1
+        break
+      else
+        current_index += 1
+      end
+    end
+    open_index
   end
 
   # Simple method to return the number of items in the hash
   def size
-    @items.length
+    @size
   end
 
   # Resize the hash
   def resize
-    arr = Array.new(@size)
-    @items = @items.clone + arr
-
+    old_arr = @items
+    @size = @size * 2
+    @items = Array.new(@size)
+    old_arr.each do |item|
+      if item != nil
+        @items[index(item.key, @size)] = item
+      end
+    end
     @items
   end
 

@@ -24,6 +24,8 @@ class MyStack
   def empty?
     if @stack.length > 0
       false
+    else
+      return true
     end
   end
 end
