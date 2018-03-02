@@ -11,7 +11,7 @@ class BinarySearchTree
       return nil
     elsif root.rating < node.rating
       root.right.nil? ? (root.right = node) : insert(root.right, node)
-    else root.rating > node.rating
+    else
       root.left.nil? ? (root.left = node) : insert(root.left, node)
     end
   end
