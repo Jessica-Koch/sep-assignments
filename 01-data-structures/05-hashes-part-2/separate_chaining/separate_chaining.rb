@@ -13,33 +13,15 @@ class SeparateChaining
   def []=(key, value)
     i = index(key, @size)
     node = Node.new(key, value)
-    if @items[index(key, @size)] && @items[index(key, @size)].head.value == value
-      @items[index(key, @size)].add_to_tail(node)
-      @node_count = @node_count + 1
-
-
-    elsif @items[index(key, @size)] && @items[index(key, @size)].head.key != key
-      # puts "elsif #{@items}"
-      # puts '================================================'
-      resize
-      @items[index(key, @size)].add_to_tail(node)
-      @node_count = @node_count + 1
-
-
-    else
-      # puts "else #{@items}"
-      # puts '================================================'
-
-      @items[index(key, @size)] = LinkedList.new
-      @items[index(key, @size)].add_to_front(node)
-      @node_count = @node_count + 1
-
-    end
+    @items[i] ||= LinkedList.new
+    @items[i].add_to_front(node)
+    @node_count += 1
+    resize if load_factor > max_load_factor
   end
 
   def [](key)
     i = index(key, @size)
-    @items[index(key, size)].tail.value
+    @items[i].head.value
   end
 
   # Returns a unique, deterministically reproducible index into an array
@@ -64,21 +46,16 @@ class SeparateChaining
 
   # Resize the hash
   def resize
-    new_chain = @items + Array.new(@size)
-    # puts "resizing hash"
-    @items.each do |linked_list|
-      #   # puts linked_list == nil
-      #   # if linked_list == nil
-      #   #   puts new_chain.methods
-      #   # elsif linked_list
-      # puts "linked_list: #{linked_list}"
-      #   #
-      #   # end
-      #
-      #   # first_node = linked_list.head
-      #   # puts "first_node key: #{first_node.key}"
+    old_arr = @items
+    @size = @size * 2
+    @items = Array.new(@size)
+    old_arr.each do |item|
+      if item != nil
+
+        @items[index(item.head.key, @size)] = item
+      end
     end
-    # puts "Hash resized"
+    @items
   end
 
 end

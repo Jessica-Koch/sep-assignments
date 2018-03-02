@@ -3,43 +3,57 @@ require_relative 'node'
 class BinarySearchTree
 
   def initialize(root)
-    @root = Node.new(root.title, root.rating)
-    @right = nil
-    @left = nil
+    @root = root
   end
 
   def insert(root, node)
-    puts "node #{node.title}"
-    if (root.left == nil)
-      root.left = node
-      @left = root.left
-    elsif root.left != nil && root.right == nil
-      root.right = node
+    if @root.nil?
+      return nil
+    elsif root.rating < node.rating
+      root.right.nil? ? (root.right = node) : insert(root.right, node)
+    else root.rating > node.rating
+      root.left.nil? ? (root.left = node) : insert(root.left, node)
     end
   end
 
   # Recursive Depth First Search
   def find(root, data)
-    return nil if data.nil?
-    temp = root
-    if root.title == data
-      puts 'It is the root!'
+    if root.nil? || data.nil?
+      return nil
+    elsif root.title == data
       return root
-    else
-      # puts "left root: #{root.left}"
-      # puts "right root: #{root.right}"
+    elsif !root.left.nil? && root.right.nil?
+      root = find(root.left, data)
+    elsif root.left.nil? && !root.right.nil?
+      root = find(root.right, data)
     end
-    # puts "root: #{root.title}"
-    puts "data: #{data}"
   end
 
+
   def delete(root, data)
+    if root.nil? || data.nil?
+      return nil
+    else
+      node_to_delete = find(root, data)
+
+      node_to_delete.nil? ? nil : (node_to_delete.title = nil && node_to_delete.rating = nil)
+    end
   end
 
   # Recursive Breadth First Search
   def printf(children=nil)
-    children.each do |child|
-      puts "child #{child}"
+    queue = [@root]
+    result = []
+    while queue.length > 0
+      root = queue.shift
+      if root.left != nil
+        queue.push(root.left)
+      end
+      if root.right != nil
+        queue.push(root.right)
+      end
+      result.push("#{root.title}: #{root.rating}")
     end
+    result.each {|node| puts node}
   end
 end
