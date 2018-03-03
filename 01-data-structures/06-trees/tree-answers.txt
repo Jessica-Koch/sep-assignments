@@ -1,0 +1,3 @@
+Binary Trees are used to index databases so that the values can be retrieved more quickly.  React uses BST to locate elements to update in the dom that it creates.
+
+Heaps are used to create priority queues because it's easy to remove an item with a high priortity as it will always be the root node. Finding the min/max element takes constant time. 
