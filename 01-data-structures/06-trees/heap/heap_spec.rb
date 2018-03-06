@@ -24,36 +24,31 @@ RSpec.describe Heap, type: Class do
     end
 
     it "properly inserts a new node" do
-      heap.insert(hope) # 93
+      heap.insert(hope)
       expect(heap.items[0].rating).to eq 93
 
-      heap.insert(donnie) # 85
+      heap.insert(donnie)
       expect(heap.items[0].rating).to eq 85
       expect(heap.items[1].rating).to eq 93
-
-      heap.insert(inception) # 86
+      #
+      heap.insert(inception) # 7
       expect(heap.items[0].rating).to eq 85
       expect(heap.items[1].rating).to eq 86
       expect(heap.items[2].rating).to eq 93
 
-      heap.insert(pacific_rim) # 72
+      heap.insert(pacific_rim) # 19
       expect(heap.items[0].rating).to eq 72
+      expect(heap.items[1].rating).to eq 85
+      expect(heap.items[2].rating).to eq 93
+      expect(heap.items[3].rating).to eq 86
 
+      heap.insert(jedi) # 1
+      expect(heap.items[0].rating).to eq 72
+      expect(heap.items[1].rating).to eq 80
+      expect(heap.items[2].rating).to eq 93
+      expect(heap.items[3].rating).to eq 86
+      expect(heap.items[4].rating).to eq 85
     end
-
-
-    # it "adds everything properly" do
-    #   heap.insert(mad_max_2) # 98
-    #   heap.insert(braveheart) # 78
-    #   heap.insert(empire) # 94
-    #   heap.insert(jedi) # 80
-    #   heap.insert(district) #
-    #   heap.insert(shawshank) #
-    #   heap.insert(martian) #
-    #
-    #   expect(heap.items[0]).to eq pacific_rim
-    #   expect(heap.items[heap.items.size - 1]).to eq mad_max_2
-    # end
   end
 
   describe "#find(data)" do
@@ -80,13 +75,14 @@ RSpec.describe Heap, type: Class do
     end
   end
 
-  describe "#delete(data)" do
+  describe "#delete" do
     it "properly deletes a node" do
       heap.insert( hope) # 93
       heap.insert(inception) # 86
       heap.insert(donnie) # 85
       expect(heap.delete).to eq donnie
     end
+
   end
 
   describe "#print" do

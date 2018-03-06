@@ -1,3 +1,13 @@
 Binary Trees are used to index databases so that the values can be retrieved more quickly.  React uses BST to locate elements to update in the dom that it creates.
 
-Heaps are used to create priority queues because it's easy to remove an item with a high priortity as it will always be the root node. Finding the min/max element takes constant time. 
+Heaps are used to create priority queues because it's easy to remove an item with a high priortity as it will always be the root node. Finding the min/max element takes constant time.
+
+user     system      total        real
+tree insert                                                                                            0.510000   0.010000   0.520000 (  0.517414)
+heap insert                                                                                            0.150000   0.000000   0.150000 (  0.158127)
+user     system      total        real
+tree find                                                                                              0.000000   0.000000   0.000000 (  0.000013)
+heap find                                                                                              0.020000   0.000000   0.020000 (  0.029326)
+user     system      total        real
+tree delete                                                                                            0.000000   0.000000   0.000000 (  0.000017)
+heap delete                                                                                            0.000000   0.000000   0.000000 (  0.000020)

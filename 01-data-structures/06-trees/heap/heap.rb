@@ -1,5 +1,4 @@
 require_relative 'node'
-
 class Heap
   attr_reader :items
 
@@ -25,9 +24,9 @@ class Heap
 
   def delete
     swap(1, @items.size - 1)
-    max = @items.pop
+    last_item = @items.pop
     bubble_down(0)
-    max
+    last_item
   end
 
 
@@ -38,37 +37,45 @@ class Heap
     end
   end
 
-  def swap(source, target)
-    @items[source], @items[target] = @items[target], @items[source]
+  def swap(a, b)
+    temp = @items[a]
+    @items[a] = @items[b]
+    @items[b] = temp
   end
 
-  def bubble_down(index)
+  def bubble_down( index)
+    root = @items[0]
     child_index = (index * 2)
+    l = child_index + 1
+    r = child_index + 2
+    not_the_last_element = child_index < @items.size - 1
 
-    return if child_index > @items.size - 1
+    if l < @items.size && @items[l].rating < root.rating
+      swap(l, 0)
+      bubble_up(@items.size - 1)
+    end
 
-    not_the_last_item = child_index <= @items.size - 1
-    left_item = @items[child_index]
-    right_item = @items[child_index + 1]
-    child_index += 1 if not_the_last_item && right_item.rating > left_item.rating
+    if r < @items.size && @items[r].rating < root.rating
+      swap(r, 0)
+      bubble_up(@items.size - 1)
+    end
+    child_index += 1 if not_the_last_element && @items[r].rating > @items[l].rating
 
-    return if @items[index].rating <= @items[child_index].rating
+    if @items[0] != @items[index]
+      swap(index, 0)
+    end
 
-    swap(index, child_index)
-
-    bubble_down(child_index)
   end
 
   def bubble_up(index)
     parent_index = (index / 2)
 
     # return if we reach the root element
-    return if index <= 0
-
     return if @items[parent_index].rating <= @items[index].rating
-
     swap(index, parent_index)
+
     bubble_up(parent_index)
   end
+
 
 end
