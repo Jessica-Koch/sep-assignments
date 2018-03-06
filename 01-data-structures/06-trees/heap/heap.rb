@@ -46,8 +46,8 @@ class Heap
   def bubble_down( index)
     root = @items[0]
     child_index = (index * 2)
-    l = child_index + 1
-    r = child_index + 2
+    l = child_index
+    r = child_index + 1
     not_the_last_element = child_index < @items.size - 1
 
     if l < @items.size && @items[l].rating < root.rating
@@ -59,10 +59,12 @@ class Heap
       swap(r, 0)
       bubble_up(@items.size - 1)
     end
+
     child_index += 1 if not_the_last_element && @items[r].rating > @items[l].rating
 
     if @items[0] != @items[index]
       swap(index, 0)
+      bubble_up(@items.size - 1)
     end
 
   end
