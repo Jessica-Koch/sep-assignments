@@ -22,13 +22,24 @@ class Heap
     end
   end
 
-  def delete
-    swap(1, @items.size - 1)
-    last_item = @items.pop
-    bubble_down(0)
-    last_item
+  def delete(data)
+    idx = find_index(data.title)
+
+    swap(idx, @items.size - 1)
+    @items.delete_at(@items.size - 1)
+    bubble_down(idx)
+
   end
 
+  def find_index(data)
+    idx = 0
+    @items.each do |i|
+      break if i.title == data
+
+      idx+=1
+    end
+    idx
+  end
 
   def print(children=nil)
 
@@ -72,8 +83,9 @@ class Heap
   def bubble_up(index)
     parent_index = (index / 2)
 
+    return if index <= 0
     # return if we reach the root element
-    return if @items[parent_index].rating <= @items[index].rating
+    return if @items[index].rating >= @items[parent_index].rating
     swap(index, parent_index)
 
     bubble_up(parent_index)

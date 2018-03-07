@@ -30,13 +30,13 @@ RSpec.describe Heap, type: Class do
       heap.insert(donnie)
       expect(heap.items[0].rating).to eq 85
       expect(heap.items[1].rating).to eq 93
-      #
+
       heap.insert(inception) # 7
       expect(heap.items[0].rating).to eq 85
       expect(heap.items[1].rating).to eq 86
       expect(heap.items[2].rating).to eq 93
 
-      heap.insert(pacific_rim) # 19
+      heap.insert(pacific_rim)
       expect(heap.items[0].rating).to eq 72
       expect(heap.items[1].rating).to eq 85
       expect(heap.items[2].rating).to eq 93
@@ -45,9 +45,9 @@ RSpec.describe Heap, type: Class do
       heap.insert(jedi) # 1
       expect(heap.items[0].rating).to eq 72
       expect(heap.items[1].rating).to eq 80
-      expect(heap.items[2].rating).to eq 93
+      expect(heap.items[2].rating).to eq 85
       expect(heap.items[3].rating).to eq 86
-      expect(heap.items[4].rating).to eq 85
+      expect(heap.items[4].rating).to eq 93
     end
   end
 
@@ -80,24 +80,20 @@ RSpec.describe Heap, type: Class do
       heap.insert( hope) # 93
       heap.insert(inception) # 86
       heap.insert(donnie) # 85
-      expect(heap.delete).to eq donnie
+      heap.delete(donnie)
+      expect(heap.items[0]).to eq inception
     end
 
   end
 
   describe "#print" do
     specify {
-      expected_output = "Pacific Rim: 72\nBraveheart: 78\nStar Wars: Return of the Jedi: 80\nThe Matrix: 87\nDistrict 9: 90\nStar Wars: The Empire Strikes Back: 94\nInception: 86\nStar Wars: A New Hope: 93\nThe Shawshank Redemption: 91\nThe Martian: 92\nMad Max 2: The Road Warrior: 98\n"
+      expected_output = "Pacific Rim: 72\nStar Wars: Return of the Jedi: 80\nDonnie Darko: 85\nInception: 86\nStar Wars: A New Hope: 93\n"
       heap.insert(hope) # 93
-      heap.insert(empire)
+      heap.insert(donnie)
       heap.insert(jedi)
-      heap.insert(martian)
+      heap.insert(inception)
       heap.insert(pacific_rim)
-      heap.insert(inception) # 86
-      heap.insert(braveheart)
-      heap.insert(shawshank)
-      heap.insert(district) # 90
-      heap.insert(mad_max_2) # 98
       expect { heap.print }.to output(expected_output).to_stdout
     }
   end
