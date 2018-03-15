@@ -59,12 +59,12 @@ RSpec.describe Graph, type: Class do
     end
 
     it "finds Anthony Hopkins" do
-      paths = ['Flatliners', 'Proof']
+      paths = ["The Human Stain", "Proof", "The Air I Breathe"]
       expect(graph.find_kevin_bacon(anthony_hopkins)).to eq(paths)
     end
 
     it "finds Nicole Kidman" do
-      paths = [ 'The Human Stain', 'The Air I Breath']
+      paths = ["The Human Stain", "Proof", "The Air I Breathe"]
       expect(graph.find_kevin_bacon(nicole_kidman)).to eq(paths)
     end
 
