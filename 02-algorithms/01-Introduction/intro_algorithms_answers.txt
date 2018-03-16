@@ -1,0 +1,32 @@
+Completing a gym exercise:
+
+WHILE set < 3
+  REPEAT
+    exercise
+    INCREMENT rep
+  UNTIL rep EQUAL 15
+  INCREMENT set
+ENDWHILE
+
+-------------------------------------------
+
+make a protein shake
+
+FOR all ingredients in protein shake
+  IF ingredient was not yet added THEN add ingredients
+  ELSE
+    blend incredients
+  END IF
+END FOR
+
+-------------------------------------
+
+brushing teeth
+
+WHILE toothbrush is on
+  REPEAT
+    FOR teeth in quadrant
+      move brush up and down 
+    END FOR
+  UNTIL brush pulse pauses then move to next quadrant
+END WHILE
