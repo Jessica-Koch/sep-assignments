@@ -1,0 +1,22 @@
+1. 7
+
+2. 5
+26 -> 13 -> 6 -> 3 -> 1 -> 0
+
+ 1 + 1 + 2 + 3 + 5 + 8 + 13 + 21 + 34 + 55 + 89 + 144
+
+3a. 55
+3b. 89
+3c. 144
+
+
+-----------------------------------
+Fib recursive vs iterative
+
+user     system      total        real
+iterative:   0.000000   0.000000   0.000000 (  0.000022)
+recursive:   1.420000   0.010000   1.430000 (  1.439617)
+-----------------------------------
+1. With an unordered collection binary search doesn't work, so linear would have to be used. It depends on the circumstance wheather to use recursion or iteration, but because recursion can be slower, I'll say iteration in this case.
+
+2. For a sorted collection, i would use binary search as it is much faster.  Since iterative searches are faster, I would opt for iterative binary search, according to a google search, a processor can be optimized for recursion which leads to negligible time difference.
