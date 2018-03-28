@@ -52,20 +52,16 @@ class Array
   end
 
   def heap_sort
-    puts "--------HEAP_SORT START--------"
-    # return self if size <= 1
-    build_max_heap
+    return self if length <= 1
+    build_heap
 
-    last_element = size - 1
+    last_element = length - 1
 
     while last_element > 0
       swap(0, last_element)
-
       heapify(0, last_element)
       last_element -= 1
-
     end
-    puts "--------HEAP_SORT END--------"
     self
   end
 
@@ -154,49 +150,37 @@ class Array
   private
 
   # turn array into heap
-  def build_max_heap
-    puts "--------BUILD_MAX_HEAP START--------"
+  def build_heap
     parent = (size / 2 - 1).floor
 
     while parent >= 0
       heapify(parent, size)
       parent -= 1
     end
-    puts "--------BUILD_MAX_HEAP END--------"
   end
 
   # restructure heap after removing root
-  def heapify(parent, heap_size)
-    puts "--------HEAPIFY START--------"
-    puts "ARGS( p: #{parent}, size: #{heap_size})"
-    while parent < heap_size
-
-      left_child = (parent * 2) + 1
+  def heapify(i, max)
+    while i < max
+      index = i
+      left_child = (i * 2) + 1
       right_child = left_child + 1
 
-      puts "IN WHILE p:#{self[parent]} L: #{self[left_child]} R: #{self[right_child]} sz: #{heap_size}"
+      return if right_child >= max && left_child >= max
 
-      max = parent
-
-      if left_child < heap_size && self[parent] < self[left_child]
-        max = left_child
-        puts "max: #{self[max]}  p: #{self[parent]}"
-        max
+      if right_child >= max || self[left_child] > self[right_child]
+        max_child = left_child
+      else
+        max_child = right_child
       end
 
-      if right_child < heap_size && self[parent] < self[right_child]
-        max = right_child
-        puts "in right max: #{self[max]}  p: #{self[parent]} "
-        max
+      if self[index] < self[max_child]
+        index = max_child
       end
 
-      return if max == parent
-      swap(parent, max)
-
-
-      puts "size #{heap_size}"
-      puts "--------HEAPIFY END--------"
-      parent = max
+      return if index == i
+      swap(i, index)
+      i = index
     end
   end
 
