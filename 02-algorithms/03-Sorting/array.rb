@@ -1,9 +1,4 @@
 class Array
-  attr_reader :sorted
-  def initialize
-    @sorted = []
-  end
-
   def bubble_sort
     return self if length <= 1
     n = size
@@ -24,31 +19,37 @@ class Array
     return self
   end
 
-  def bucket_sort
-    return self if length <= 1
+  def bucket_sort()
+    return self if empty?
+    array = self
+    bucket_size = 5
+    min_value = array.min
+    max_value = array.max
 
-    min_value = self.min
-    max_value = self.max
-
-    bucket_size = size
+    #initialize bucket array
     bucket_count = ((max_value - min_value) / bucket_size).floor + 1
-
+    #set array buckets length
     buckets = Array.new(bucket_count)
-
-    # init buckets
-    (0..buckets.length - 1).each do |i|
-      buckets[i] = []
+    (0..buckets.length - 1).each do |b|
+      buckets[b] = []
     end
 
-    (0..size - 1).each do |j|
-      buckets[((self[j] - min_value) / bucket_size).floor].push(self[j])
+
+    # place input array values into buckets
+    (0..array.length - 1).each do |i|
+      #   # use .floor to make it a whole number
+      bucket_idx = ((array[i] - min_value) / bucket_size).floor
+      buckets[bucket_idx].push(array[i])
     end
 
-    clear
-    buckets.length
-    # (0..buckets.length = 1).each do |b|
-    #   buckets[b].insertion_sort
-    # end
+    array.clear
+    (0...buckets.length).each do |i|
+      buckets[i].quick_sort
+      buckets[i].each do |j|
+        array.push(j)
+      end
+    end
+    array
   end
 
   def heap_sort
@@ -75,7 +76,7 @@ class Array
 
       #  insert element in correct location
       while sorted_arr_index < sorted_arr.length
-        if val <=sorted_arr[sorted_arr_index]
+        if val <= sorted_arr[sorted_arr_index]
           # if val is less than or equal to element at index, insert it
           sorted_arr.insert(sorted_arr_index, val)
           break
@@ -140,7 +141,7 @@ class Array
       # set arr[min_index] to tmp
       tmp = self[i]
       self[i] = self[min_index]
-      self[min_index]= tmp
+      self[min_index] = tmp
     end
 
     return self
