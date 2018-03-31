@@ -1,0 +1,16 @@
+1. O(1) is as if a car is running on cruise control, while O(2n) is as if a car is running in first gear with the parking break down.
+2. Worst case runtime for binary search is O(log n), this is because binary search continually halves the data that is fed into it.  So it grows no slower than O(log n)
+
+3. Best case for binary search is O(1) or constant time, it could technically find something on its first guess. So it grows no faster than O(1)
+
+
+4. O(1) < f(n) < log(n)
+
+5. see attached
+6. infinity
+7. n^2
+8.
+9. The worst case iteration is 0(n ) because the most it can run(and thus worst case) is the length of the collection, so the time is directly proportional to the size of the collection
+
+10. Worst case for binary search is O(log n)
+11. Best case run time is constant or O(1)
