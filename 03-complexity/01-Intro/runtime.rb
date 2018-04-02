@@ -1,5 +1,5 @@
 def runtime(n)
-  puts "Collection of length #{n} would have a number of iterations of #{n}"
+  puts "#{n^2}"
 end
 
 runtime(1)

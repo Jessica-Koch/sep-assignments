@@ -4,7 +4,7 @@
 3. Best case for binary search is O(1) or constant time, it could technically find something on its first guess. So it grows no faster than O(1)
 
 
-4. O(1) < f(n) < log(n)
+4.  The bounded case scenario is taking big O notation and big omega notation and realizing that it creates a range.  Big O is the upper boudn, or worst case while big theta is the lower bound and best case scenario.
 
 5. see attached
 6. infinity
@@ -14,3 +14,4 @@
 
 10. Worst case for binary search is O(log n)
 11. Best case run time is constant or O(1)
+12. O(1) < f(n) < log(n)
