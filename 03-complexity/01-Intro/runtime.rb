@@ -1,5 +1,9 @@
 def runtime(n)
-  puts "#{n^2}"
+  if n < 5
+    puts "#{n^2}"
+  else
+    puts "#{2^n}"
+  end
 end
 
 runtime(1)

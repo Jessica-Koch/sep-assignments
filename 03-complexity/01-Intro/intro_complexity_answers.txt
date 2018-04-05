@@ -4,7 +4,7 @@
 3. Best case for binary search is O(1) or constant time, it could technically find something on its first guess. So it grows no faster than O(1)
 
 
-4.  The bounded case scenario is taking big O notation and big omega notation and realizing that it creates a range.  Big O is the upper boudn, or worst case while big theta is the lower bound and best case scenario.
+4.  The bounded case scenario defining a range saying that binary search can be anywhere from time X to time Y.  It' the range constrained by the best and worst case run times. 
 
 5. see attached
 6. infinity
