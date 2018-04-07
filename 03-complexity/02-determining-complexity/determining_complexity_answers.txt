@@ -1,0 +1,11 @@
+1. Constant time, there are no iterations, it is fed one parameter and prints it. O(1)
+
+2. O(n), linear, it loops through the entire collection, one item at a time, as the size of the collection grows, so does the time it takes to iterate.
+
+3.  O(n^2), exponential, because it loops once, and then again so effectively O(n) * O(n).
+
+4. O(2^n), for each number you are running the function twice for the "n" length of the collection.
+
+5. This is linear as it loops through the array "n" times.
+
+6. O(n log n), logarithmic, it loops through the array O(n), and partitions it, diving the array in two parts is log n, thus O(n * log n)
