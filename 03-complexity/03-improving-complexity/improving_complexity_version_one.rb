@@ -1,4 +1,4 @@
-def poorly_written_ruby(*arrays)
+def better_ruby(*arrays)
   combined_array = arrays.reduce([], :concat)
 
   sorted_array = [combined_array.delete_at(0)]

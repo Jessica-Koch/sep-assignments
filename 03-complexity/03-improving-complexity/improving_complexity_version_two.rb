@@ -1,4 +1,4 @@
-def poorly_written_ruby(*arrays)
+def improved_algorithm(*arrays)
   combined_array = arrays.reduce([], :concat)
 
   return combined_array if combined_array.length <= 1
@@ -6,5 +6,5 @@ def poorly_written_ruby(*arrays)
   pivot = combined_array.delete_at(rand(combined_array.length))
 
   left, right = combined_array.partition(&pivot.method(:>))
-  return poorly_written_ruby(left), [pivot], poorly_written_ruby(right)
+  return improved_algorithm(left), [pivot], improved_algorithm(right)
 end
