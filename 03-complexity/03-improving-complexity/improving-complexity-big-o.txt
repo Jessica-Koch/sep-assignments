@@ -21,4 +21,4 @@ time_for_space 100,000 item array                              0.700000   0.0400
 poorly_written_ruby O(2^n)
 better_ruby  - O(2^n)
 improved_algorithm - O(n log n)
-time_for_space O(log n)
+time_for_space O(n)
