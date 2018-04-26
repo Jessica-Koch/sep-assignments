@@ -18,7 +18,7 @@ time_for_space 1,000 item array                                0.000000   0.0000
 time_for_space 10,000 item array                               0.050000   0.000000   0.050000 (  0.048890)
 time_for_space 100,000 item array                              0.700000   0.040000   0.740000 (  0.749842)
 
-poorly_written_ruby O(2^n)
-better_ruby  - O(2^n)
-improved_algorithm - O(n log n)
-time_for_space O(n)
+poorly_written_ruby -- O(2^n)
+better_ruby ---------- O(2^n)
+improved_algorithm --- O(n log n)
+time_for_space -------- O(n)

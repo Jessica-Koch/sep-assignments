@@ -5,6 +5,7 @@ def better_ruby(*arrays)
 
   for val in combined_array
   i = 0
+
   while i < sorted_array.length
     if val <= sorted_array[i]
       sorted_array.insert(i, val)
