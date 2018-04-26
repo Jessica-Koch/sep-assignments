@@ -1,0 +1,34 @@
+1.a. string
+b. integer
+c. datetime
+d. float
+e. float(without $)
+
+2. A database is used when you need to add information and retrieve it, update it, possibly delete it. A text file could be used to issue a report that will then be sent in an email or something similar, where data is temporary and will not need to be called upon later in the application.
+
+3. SQL is declarative, it is told the result that you want and it retrieves it where other languages are given a series of steps and they run the steps.  It's like cooking a recipe vs  ordering delivery.
+
+4. A database system is a cache of information that is stored to be fetched(queried), added to, updated, and deleted as needed.
+
+5.  a database is composed of tables, a table as columns with a type header(name, phone number, etc) and within it there are rows that are constrained by the data type that the column will accept.  those items are usually associated with a row based upon an id.  value is the thing that is within the column at row "x"
+
+6.varchar, smallint, bigint
+
+7. get the date and how much was spent from the payment table.
+
+from the payment table, show me the amounts where the cost was over $500
+
+get all the columns from the payments table where the value of payee equals 'Mega Foods'
+
+
+8a. SELECT email, signup FROM users where name = 'DeAndre Data'
+
+#=> datad@comcast.net, 2008-01-20
+
+8b. SELECT id from users where email = 'aleesia.algorithm@uw.edu'
+
+#=> 1
+
+8c. SELECT * from users where id = 4
+
+#=> 4, Brandy Boolean, 	bboolean@nasa.gov, 1999-10-15
