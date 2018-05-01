@@ -1,0 +1,74 @@
+1. SELECT * from dogs;
+2. sweaty feet will give horrible odors
+3a. SELECT name, gender, age
+  FROM dogs
+  WHERE breed LIKE '%Labrador%';
+3b. SELECT id
+  FROM dogs
+  WHERE age < 1;
+
+3c. SELECT name, age
+  FROM dogs
+  WHERE gender = 'F' AND weight > 35;
+
+3d. SELECT *
+FROM dogs
+WHERE breed NOT LIKE '%Shepherd%';
+
+3e. SELECT id, age, weight, breed
+FROM dogs
+WHERE weight > 60 OR breed LIKE '%Great Dane%'
+
+4a.
+name	adoption_date
+Mushi	2016-03-22
+Seashell	(null)
+Azul	2016-04-17
+Victoire	2016-09-01
+Nala	(null)
+
+4b.
+name	age
+Mushi	1
+Seashell	7
+Azul	3
+Victoire	7
+Nala	1
+
+5a. SELECT * from cats WHERE adoption_date IS NULL;
+5b. SELECT name, gender
+FROM cats
+WHERE age = 7;
+5c. SELECT name from cats;
+
+6. < greater than
+  6 > 5
+
+> less than
+5 < 6
+
+<= greater than or equal to
+5<= 5
+
+>= less than or equal to
+4>= 4
+
+!= not equal to
+4 != 'dog'
+
+<> not equal to
+4 <> 3
+
+= equal to
+1 = 1
+
+7a. ERROR: column "‘f’" does not exist Hint: Perhaps you meant to reference the column "cats.id" or the column "cats.age". Position: 38
+
+7b.
+name
+Mushi
+Seashell
+Victoire
+Nala
+
+7c. ERROR: column "‘mushi’" does not exist Position: 35
