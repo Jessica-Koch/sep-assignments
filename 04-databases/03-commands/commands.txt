@@ -1,0 +1,173 @@
+1a. INSERT INTO <table name> (<columns to update>) VALUES
+
+ex. INSERT INTO dogs (1, 'Nico', 'mini husky');
+
+1b. UPDATE <table name> SET <column>=VALUE WHERE id=13
+ex. UPDATE dogs SET breed='Alaskan Klee Kai' WHERE id=1;
+
+1c. DELETE FROM dogs WHERE id=3;
+
+2.the values that are passed in should be in the order in which they appear in the table columns because if they happen to have the same data type, postgres will insert them and not throw an error.
+
+3. JSON - could save a response or an array of items to be retrieved and parsed (we actually do this where i work for a form field)
+
+uuid-  an id, predictably incremented ids are insecure, pg has a library to create uuids.
+
+text - strings - names, products,etc.
+
+4a. text, hstore extension for the address|| json || text, bool, integer, integer respectively
+
+4b. CREATE TABLE rsvps (
+  first_name text,
+  last_name text,
+  address json,
+  RSVPed boolean,
+  number_of_guests integer,
+  number_of_meals integer
+);
+
+4c. ALTER TABLE rsvps ADD COLUMN sent_thank_you boolean;
+
+4d. ALTER TABLE rsvps DROP COLUMN number_of_meals;
+
+4e. DROP TABLE rsvps;
+
+5a. CREATE TABLE books (
+isbn ISBN13,
+title text,
+author text,
+genre text,
+publish_date DATETIME,
+copies integer,
+available_copies integer
+)
+
+5b. INSERT INTO books (
+978-0521861243,
+'How to Prove It: A Structured Approach',
+'Daniel J. Velleman',
+'mathematics',
+2006-01-16,
+100,
+50
+);
+
+INSERT INTO books (
+978-1250192455,
+'A Higher Loyalty: Truth, Lies, and Leadership',
+'James Comey',
+2018-04-17,
+'History',
+100,
+50
+);
+
+INSERT INTO books (
+978-0062820150,
+'Magnolia Table: A Collection of Recipes for Gathering',
+'Joanna Gaines',
+2018-04-24,
+'Cookbooks',
+100,
+50
+);
+
+5c. UPDATE books SET available_copies=49 WHERE isbn=978-0062820150;
+
+5d. DELETE from books WHERE isbn=978-0521861243;
+
+6a. CREATE TABLE spacecrafts (
+  id integer,
+  name text,
+  launch_year integer,
+  country text,
+  mission text,
+  orbiting_body text,
+  operational boolean,
+  miles_from_earth bigint
+)
+
+6b. INSERT INTO spacecrafts (
+1,
+'ship a',
+2018,
+'rando planet',
+'l;aksdfj;lasjdf;lajsdf;lkja',
+'bloop',
+true,
+9223372036854775808
+);
+
+INSERT INTO spacecrafts (
+2,
+'ship b',
+2017,
+'rando planet 2',
+'goiashdf;klahwes;fhawo;dsfj;alsjdfklsa',
+'foobar',
+true
+5223355036854775808
+);
+
+INSERT INTO spacecrafts (
+3,
+'ship c',
+2017,
+'rando planet 3',
+'uohasdf;liawjeropiwje',
+'floof',
+true,
+6223355036854775808
+);
+
+6c.DELETE from spacecrafts WHERE id=3
+
+6d. UPDATE spacecrafts SET operational=false where ID=2
+
+7a. CREATE table emails (
+id integer,
+subject text,
+sender text,
+recipients json,
+body text,
+timestamp timestamp,
+read boolean,
+chain_id integer
+)
+
+7b. INSERT into emails (
+1,
+'asdlfkj',
+'me@me.com',
+{"recipients": ["abc@me.com"]},
+'asdfasdfawerwrw',
+'2004-10-19 10:23:54',
+true,
+1
+)
+
+INSERT into emails (
+2,
+'oieura;sdj',
+'me@gmail.com',
+{"recipients": ["me@me.com"]},
+'asdfasdfawerwrw',
+'2004-12-19 10:23:54',
+true,
+1
+)
+
+INSERT into emails (
+3,
+'asdfasd2thaoa;oasdnasdnmawnfm,',
+'me@gmail.com',
+{"recipients": ["me@me.com"]},
+'asdertiuoijpklmg.d',
+'2005-12-19 10:23:54',
+false,
+2
+)
+
+7c. DELETE from emails WHERE id=3;
+
+7d. UPDATE emails SET read=false WHERE id=2;
