@@ -4,41 +4,50 @@ require_relative "tsp_greed"
 
 
 describe "tsp_greed" do
-  cities = [
-    {
-      name: 'A',
-      neighbors: [
-        {name: 'B', distance: 3}, {name: 'D',distance: 2}, {name: 'F', distance: 1}
-      ],
-      visited: false
-    },
-    {
-      name: 'B',
-      neighbors: [{name: 'A', distance: 3}, {name: 'C', distance: 2}],
-      visited: false
-    },
-    {
-      name: 'C',
-      neighbors: [{name: 'B', distance: 2}, {name: 'F', distance: 3}],
-      visited: false
-    },
-    {
-      name: 'D',
-      neighbors: [{name: 'A', distance: 2}, {name: 'E', distance: 3}, {name: 'F', distance: 4}],
-      visited: false
-    },
+cities = [
+  {
+    name: 'A',
+    neighbors: [
+      {name: 'B', distance: 3},
+      {name: 'D',distance: 2},
+      {name: 'F', distance: 1}
+    ],
+    visited: false
+  },
+  {
+    name: 'B',
+    neighbors: [{name: 'A', distance: 3}, {name: 'C', distance: 2}],
+    visited: false
+  },
+  {
+    name: 'C',
+    neighbors: [{name: 'B', distance: 2},{name: 'D', distance: 5}, {name: 'F', distance: 3}],
+    visited: false
+  },
+  {
+    name: 'D',
+    neighbors: [
+      {name: 'A', distance: 2},
+      {name: 'C', distance: 5},
+      {name: 'E', distance: 3},
+      {name: 'F', distance: 4}
+    ],
+    visited: false
+  },
 
-    {
-      name: 'E',
-      neighbors: [{name: 'D', distance: 3}, {name: 'F', distance: 2}],
-      visited: false
-    },
-    {
-      name: 'F',
-      neighbors: [{name: 'A', distance: 1}, {name: 'C', distance: 3}, {name: 'D', distance: 4}, {name: 'E', distance: 2}],
-      visited: false
-    },
-  ]
+  {
+    name: 'E',
+    neighbors: [{name: 'D', distance: 3}, {name: 'F', distance: 2}],
+    visited: false
+  },
+  {
+    name: 'F',
+    neighbors: [
+      {name: 'A', distance: 1},
+    {name: 'C', distance: 3}, {name: 'D', distance: 4}, {name: 'E', distance: 2}],
+    visited: false
+  },
+
 
   visited_cities = tsp_greed(cities, cities[0])
   it "visits city A" do

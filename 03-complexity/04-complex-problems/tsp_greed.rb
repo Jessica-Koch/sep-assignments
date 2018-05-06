@@ -8,15 +8,13 @@ def tsp_greed(cities, current_city)
 
       if current_neighbor[:distance] < next_city[:distance] && town[:visited] == false
         next_city = current_neighbor
-        neighbor_cities.delete(current_neighbor)
-      else
-        puts "current_neighbor: #{current_neighbor} next_city: #{next_city}"
-        next_city = neighbor_cities[1]
       end
     end
     new_next_city = cities.select{|city| city[:name] == next_city[:name]}.first
     current_city[:visited] = true
 
+    puts "current_city #{current_city}"
+    puts "next_city: #{next_city}"
     tsp_greed(cities, new_next_city)
   end
   cities
@@ -37,23 +35,35 @@ cities = [
   },
   {
     name: 'C',
-    neighbors: [{name: 'B', distance: 2}, {name: 'F', distance: 3}],
+    neighbors: [{name: 'B', distance: 2},{name: 'D', distance: 5}, {name: 'F', distance: 3}],
     visited: false
   },
   {
     name: 'D',
-    neighbors: [{name: 'A', distance: 2}, {name: 'E', distance: 3}, {name: 'F', distance: 4}],
+    neighbors: [
+      {name: 'A', distance: 2},
+      {name: 'C', distance: 5},
+      {name: 'E', distance: 3},
+      {name: 'F', distance: 4}
+    ],
     visited: false
   },
 
   {
     name: 'E',
-    neighbors: [{name: 'D', distance: 3}, {name: 'F', distance: 2}],
+    neighbors: [
+      {name: 'D', distance: 3},
+    {name: 'F', distance: 2}],
     visited: false
   },
   {
     name: 'F',
-    neighbors: [{name: 'A', distance: 1}, {name: 'C', distance: 3}, {name: 'D', distance: 4}, {name: 'E', distance: 2}],
+    neighbors: [
+      {name: 'A', distance: 1},
+      {name: 'C', distance: 3},
+      {name: 'D', distance: 4},
+      {name: 'E', distance: 2}
+    ],
     visited: false
   },
 ]
