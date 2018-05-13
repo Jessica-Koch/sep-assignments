@@ -2,75 +2,66 @@ include RSpec
 require_relative "tsp_greed"
 
 
-
 describe "tsp_greed" do
-cities = [
-  {
-    name: 'A',
-    neighbors: [
-      {name: 'B', distance: 3},
-      {name: 'D',distance: 2},
-      {name: 'F', distance: 1}
-    ],
-    visited: false
-  },
-  {
-    name: 'B',
-    neighbors: [{name: 'A', distance: 3}, {name: 'C', distance: 2}],
-    visited: false
-  },
-  {
-    name: 'C',
-    neighbors: [{name: 'B', distance: 2},{name: 'D', distance: 5}, {name: 'F', distance: 3}],
-    visited: false
-  },
-  {
-    name: 'D',
-    neighbors: [
-      {name: 'A', distance: 2},
-      {name: 'C', distance: 5},
-      {name: 'E', distance: 3},
-      {name: 'F', distance: 4}
-    ],
-    visited: false
-  },
+  let(:cities){ Array.new }
+  let(:cityA){ City.new('A')}
+  let(:cityB){ City.new('B')}
+  let(:cityC){ City.new('C')}
+  let(:cityD){ City.new('D')}
+  let(:cityE){ City.new('E')}
+  let(:cityF){ City.new('F')}
 
-  {
-    name: 'E',
-    neighbors: [{name: 'D', distance: 3}, {name: 'F', distance: 2}],
-    visited: false
-  },
-  {
-    name: 'F',
-    neighbors: [
-      {name: 'A', distance: 1},
-    {name: 'C', distance: 3}, {name: 'D', distance: 4}, {name: 'E', distance: 2}],
-    visited: false
-  },
+  before do
+
+    cityA.add_neighbor(cityB, 3)
+    cityA.add_neighbor(cityD, 2)
+    cityA.add_neighbor(cityF, 1)
+
+    cityB.add_neighbor(cityA, 3)
+    cityB.add_neighbor(cityC, 2)
+
+    cityC.add_neighbor(cityB, 2)
+    cityC.add_neighbor(cityD, 5)
+    cityC.add_neighbor(cityF, 3)
+
+    cityD.add_neighbor(cityA, 2)
+    cityD.add_neighbor(cityC, 5)
+    cityD.add_neighbor(cityE, 3)
+    cityD.add_neighbor(cityF, 4)
+
+    cityE.add_neighbor(cityD, 3)
+    cityE.add_neighbor(cityF, 2)
+
+    cityF.add_neighbor(cityA, 1)
+    cityF.add_neighbor(cityC, 3)
+    cityF.add_neighbor(cityD, 4)
+    cityF.add_neighbor(cityE, 2)
 
 
-  visited_cities = tsp_greed(cities, cities[0])
+    cities.push(cityA, cityB, cityC, cityD, cityE, cityF)
+  end
+
   it "visits city A" do
-    expect(visited_cities[0][:visited]).to eq(true)
+    expect(cityB.visited).to eq(true)
   end
 
   it "visits city B" do
-    expect(visited_cities[1][:visited]).to eq(true)
+    expect(cityB.visited).to eq(true)
   end
 
   it "visits city C" do
-    expect(visited_cities[2][:visited]).to eq(true)
+    expect(cityC.visited).to eq(true)
   end
 
   it "visits city D" do
-    expect(visited_cities[3][:visited]).to eq(true)
+    expect(cityD.visited).to eq(true)
   end
 
   it "visits city E" do
-    expect(visited_cities[4][:visited]).to eq(true)
+    expect(cityE.visited).to eq(true)
   end
 
   it "visits city F" do
-    expect(visited_cities[5][:visited]).to eq(true)
+    expect(cityF.visited).to eq(true)
   end
 end
