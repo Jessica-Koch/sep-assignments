@@ -13,26 +13,27 @@ class City
   end
 end
 
-def tsp_greed(cities, current_city)
-  puts "current_city: #{current_city.visited}"
-  while !current_city.visited
+visited_cities=[]
+
+def tsp_greed(cities, current_city, visited_cities)
+  while !visited_cities.include?(current_city.name)
     neighbor_cities = current_city.neighbors
 
     # puts "next_city: outside loop #{next_city}"
     next_city = neighbor_cities[0]
     neighbor_cities.each do |current_neighbor|
 
-      if current_neighbor[:distance] < next_city[:distance] &&  !current_neighbor[:city].visited
+      if (current_neighbor[:distance] < next_city[:distance] &&  !visited_cities.include?(current_neighbor[:city].name)) || visited_cities.include?(next_city[:city].name)
         next_city = current_neighbor
       else
-        next_city = next_city[:city]
+        next_city = next_city
       end
     end
-    current_city.visited = true
+    visited_cities.push(current_city.name)
     current_city = next_city[:city]
-    tsp_greed(cities, current_city)
+    tsp_greed(cities, current_city, visited_cities)
   end
-  cities
+  return visited_cities
 end
 
 cityA = City.new('A')
@@ -69,4 +70,4 @@ cityF.add_neighbor(cityE, 2)
 
 cities = [cityA, cityB, cityC, cityD, cityE, cityF]
 
-tsp_greed(cities, cityA)
+tsp_greed(cities, cityA, visited_cities)

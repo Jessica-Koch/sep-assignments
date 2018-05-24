@@ -4,6 +4,7 @@ require_relative "tsp_greed"
 
 describe "tsp_greed" do
   let(:cities){ Array.new }
+  let(:visited_cities){ Array.new }
   let(:cityA){ City.new('A')}
   let(:cityB){ City.new('B')}
   let(:cityC){ City.new('C')}
@@ -39,29 +40,30 @@ describe "tsp_greed" do
 
 
     cities.push(cityA, cityB, cityC, cityD, cityE, cityF)
+    tsp_greed(cities, cityA, visited_cities)
   end
 
   it "visits city A" do
-    expect(cityB.visited).to eq(true)
+    expect(visited_cities.include?(cityA.name)).to eq(true)
   end
 
   it "visits city B" do
-    expect(cityB.visited).to eq(true)
+    expect(visited_cities.include?(cityB.name)).to eq(true)
   end
 
   it "visits city C" do
-    expect(cityC.visited).to eq(true)
+    expect(visited_cities.include?(cityC.name)).to eq(true)
   end
 
   it "visits city D" do
-    expect(cityD.visited).to eq(true)
+    expect(visited_cities.include?(cityD.name)).to eq(true)
   end
 
   it "visits city E" do
-    expect(cityE.visited).to eq(true)
+    expect(visited_cities.include?(cityE.name)).to eq(true)
   end
 
   it "visits city F" do
-    expect(cityF.visited).to eq(true)
+    expect(visited_cities.include?(cityF.name)).to eq(true)
   end
 end
