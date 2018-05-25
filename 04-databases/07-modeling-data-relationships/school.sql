@@ -31,6 +31,7 @@ CREATE TABLE enrollments (
 );
 
 
+
 INSERT INTO courses
   ("id", "name")
 VALUES
@@ -58,4 +59,5 @@ VALUES
  ( 1,     1,           'A'),
  ( 2,     3,             'C'),
  ( 5,     1,          'A'),
+  ( 1,     4,          'B'),
   ( 1,     2,          'B');
