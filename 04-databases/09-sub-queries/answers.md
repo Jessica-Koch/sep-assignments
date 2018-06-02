@@ -16,8 +16,8 @@ SELECT v.*, (SELECT dogs.name as dog_name FROM dogs WHERE dogs.id = v.foster_dog
 FROM volunteers v;
 ```
 |id|first_name|	last_name|	address|	phone_number|	available_to_foster	|foster_dog_id	|dog_name|
-|:---|:---|:---|:---|:---|
-|1|	Albus|	Dumbledore|	99 Godric's Hollow|	843-746-3649|false|	|(null)	|(null)|
+|:---|:---|:---|:---|:---|:---|:---|:---|
+|1|	Albus|	Dumbledore|	99 Godric's Hollow|	843-746-3649|false|	(null)	|(null)|
 |2|	Rubeus|	Hagrid|	1 Edge of Forbidden Forest	|256-667-2378	|true	|10002	|Munchkin|
 |3	|Remus	|Lupin|	12 Grimmauld Place	|627-283-3771|	true	|(null)	|(null)|
 |4|	Sirius|	Black|	12 Grimmauld Place	|878-666-4663	|true|	(null)	|(null)|
