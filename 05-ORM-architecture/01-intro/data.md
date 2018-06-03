@@ -1,0 +1,1 @@
+INSERT INTO comment (body, post_id) VALUES ('If you're visiting this page, you're likely here because you're searching for a random sentence.', 1);
