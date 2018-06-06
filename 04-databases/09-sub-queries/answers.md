@@ -60,9 +60,13 @@ WHERE adopters.id NOT IN (SELECT adopter_id FROM dog_adoptions) AND dogs.id NOT 
 
 7d.
 ```
-SELECT dogs.name as dog_name, cats.name as cat_name
-FROM dogs, cats
-WHERE cats.id NOT IN (SELECT cat_id FROM cat_adoptions) AND dogs.id NOT IN (SELECT dog_id FROM dog_adoptions);
+SELECT distinct dogs.name as pet_name 
+FROM dogs
+WHERE dogs.id NOT IN (SELECT dog_id FROM dog_adoptions) 
+UNION
+SELECT distinct cats.name as pet_name 
+FROM cats
+WHERE cats.id NOT IN (SELECT cat_id FROM cat_adoptions);
 ```
 
 |dog_name|	cat_name|
